@@ -1,0 +1,17 @@
+[
+    { 
+      "title": "Owl", 
+      "size": 4, 
+      "img": "https://www.version2.dk/sites/v2/files/topillustration/2017/07/5927758528a2060423e7b.jpg" 
+    },
+    { 
+      "title": "Seagull",
+      "size": 35, 
+      "img": "https://www.samcodes.co.uk/project/geometrize-haxe-web/assets/images/xseagull.jpg.pagespeed.ic.iK66EGA15-.jpg" 
+    }, 
+    { 
+      "title": "Bear", 
+      "size": 22,
+      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-WXtjHQNadRCsA0EWNNe_QyzX-jGpi83_zKg3seOAF6-2bupYbQ" 
+    }          
+ ]
