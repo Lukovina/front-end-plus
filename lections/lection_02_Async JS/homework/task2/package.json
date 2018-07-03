@@ -1,0 +1,19 @@
+{
+  "name": "homework24",
+  "description": ".",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^0.9.0"
+  },
+  "dependencies": {
+    "systemjs": "^0.19.27",
+    "node-static": "0.7.10"
+  },
+  "version": "1.0.0"
+}
