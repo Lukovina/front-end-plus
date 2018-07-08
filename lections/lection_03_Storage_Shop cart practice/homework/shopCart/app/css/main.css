@@ -1,0 +1,28 @@
+.container {
+    width: 900px;
+    margin: 0 auto;
+}
+.good {
+    display: inline-block;
+    border: 2px solid black;
+    margin: 5px;
+}
+
+.good-img {
+    width: 430px;
+    height: 340px;
+    background-image: url('');
+    background-position: center;
+    background-size: cover;
+}
+
+.searchInput {
+    display: block;
+    width: 98%;
+    margin: 5px auto;
+}
+
+.title {
+    text-align: center
+}
+
