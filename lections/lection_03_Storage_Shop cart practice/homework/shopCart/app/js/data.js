@@ -1,3 +1,5 @@
+const model = []
+
 function load(method, path) {
 
     let xhr = new XMLHttpRequest();
@@ -18,6 +20,14 @@ function load(method, path) {
     return async;
 }
 
+function setAddButtons() {
+    let addBtns = document.querySelectorAll(`.good button`);
+    addBtns.forEach(elem=> elem.addEventListener("click", function(){
+         console.dir(event.target)}))
+}
+
 module.exports = { 
-    load
+    load, 
+    setAddButtons,
+    model
 };
