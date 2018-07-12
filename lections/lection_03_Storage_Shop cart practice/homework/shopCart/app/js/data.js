@@ -1,4 +1,8 @@
-const model = []
+    var model = [];
+
+function initialCondition() {
+    return model
+}
 
 function load(method, path) {
 
@@ -11,7 +15,9 @@ function load(method, path) {
                 return;
             }
 
-            resolve(JSON.parse(xhr.responseText));
+            let res =  JSON.parse(xhr.responseText)
+            model = res.data.list
+            resolve(res);
         }
     });
 
@@ -20,14 +26,8 @@ function load(method, path) {
     return async;
 }
 
-function setAddButtons() {
-    let addBtns = document.querySelectorAll(`.good button`);
-    addBtns.forEach(elem=> elem.addEventListener("click", function(){
-         console.dir(event.target)}))
-}
 
 module.exports = { 
     load, 
-    setAddButtons,
-    model
+    initialCondition
 };
