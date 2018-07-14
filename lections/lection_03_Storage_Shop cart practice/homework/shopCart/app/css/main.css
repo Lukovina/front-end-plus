@@ -1,48 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+    font-size: 30px;
+    font-family: sans-serif;
+}
+
+th,td {
+    border-bottom: 1px solid lightgrey;
+    height: 100px;
+    text-align: center
+}
+
+th {
+    background-color: forestgreen;
+}
+
+td input {
+    width: 50px;
+}
+
 .container {
-    width: 900px;
+    max-width: 900px;
     margin: 0 auto;
 }
-.good {
+
+header{
+    margin-top: 50px ;
+}
+
+.searchInput {
     display: inline-block;
-    border: 1px solid black;
-    margin: 5px;
+    width: 80%;
+    height: 20px;
+    border-radius: 5px;
+    margin: 5px auto;
+}
+
+.cartButton {
+    display: inline-block;
+}
+
+.goodsTable{
     position: relative;
+    margin: 65px auto;
+    min-height: 70%;
+    width: 70%;
+    border: 1px solid grey;
+}
+
+.goods{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.good {
+    position: relative;
+    display: block;
+    width: 440px;
+    border: 1px solid lightgray
 }
 
 .good-img {
-    width: 430px;
+    width: 100%;
     height: 340px;
-    background-image: url('');
     background-position: center;
     background-size: cover;
 }
 
+.good_elements {
+    position: absolute;
+    bottom: 2%;
+    left: 10%;
+    color: white;
+}
+
 .cart {
-    position: fixed;
+    position: absolute;
     margin: 0 auto;
     left: 15%;
     top: 15%;
     min-width: 70%;
-    height: 70%;
+    min-height: 100px;
     border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px grey;
     visibility: hidden;
     background-color: #fff;
 }
 
-.goodsTable{
-    padding: 50px;
+.totalSum {
+    position: absolute;
+    left: 15%;
+    bottom: 0px; 
 }
 
-.searchInput {
-    display: block;
-    width: 98%;
-    margin: 5px auto;
+.good_cart-addBtn{
+    height: 100px;
+    width: 100px;
+    background-color: orange;
+    color: white;
+    font-size: 20px;
+    border-radius: 50%;
+    opacity: .5;
+    border: none;
+    outline: none;
 }
+
+.good_cart-addBtn:hover{
+    opacity: 1;
+}
+
+.good_cart-addBtn:active{
+    width: 95px;
+}
+
 
 .title {
     text-align: center
 }
-
 
 .close {
     position: absolute;
@@ -53,24 +129,36 @@
     opacity: 0.3;
     cursor: pointer;
     z-index: 100;
-    }
-    .close:hover {
+}
+.close:hover {
     opacity: 1;
-    }
-    .close:before, .close:after {
+}
+.close:before, .close:after {
     position: absolute;
     left: 15px;
     content: ' ';
-    height: 33px;
+    height: 30px;
     width: 2px;
     background-color: #333;
-    }
-    .close:before {
-    transform: rotate(45deg);
-    }
-    .close:after {
+}
+.close:before {
+    transform: rotate(45deg);   
+}
+.close:after {
     transform: rotate(-45deg);
-    }
+}
+
+td div.close {
+    position: relative;
+    display: inline-block;
+    right: 0px;
+    top: 5px;
+    opacity: 1;
+}
+
+td .close:before, td .close:after  {
+    background-color: red;
+}
 
 .show {
     visibility: visible
