@@ -1,27 +1,58 @@
-let goods = document.querySelector(".goods")
+let data = require("./data.js"),
+    cart = require("./cart.js")
 
 
+let goods = document.querySelector(".goods"),
+    list
+data.load("GET" , "http://localhost:3780/goods")
+    .then(val=> list = val.data.list)
+
+var localStorageModel = JSON.parse(localStorage.getItem("goods")) || []    
 
 function renderGood (element) {
     goods.innerHTML += `
     <div class="good">
         <div class="good-img" 
-        style ="background-image: url('${element.img}');">
+            style ="background-image: url('${element.img}')">
+        <div class="good_elements">
+            <p class="good_cart-title">${element.title}</p>
+            <p class="good_cart-price">Price: ${element.price}$</p>
+            <button class="good_cart-addBtn" id="${element.id}"> Add to card </button> 
+        </div>  
         </div>
-        
-    <p>${element.id}</p>
-    <p>${element.title}</p>
-    <p>${element.price}</p>
-  
-    <button id="${element.id}"> Add to card </button>
-    
     </div>
      `
 } 
+
+function addButtons() {
+    let addBtns = document.querySelectorAll(".good button");
+    addBtns.forEach(elem=> elem.addEventListener("click", ()=>sendToСard(elem.id)))
+}
+
+function sendToСard(ident) { 
+    list.forEach(item=>{
+        if(item.id == ident) {
+            item.quantity+=1;
+            item.cartPrice = item.price*item.quantity
+            if(localStorageModel.indexOf(item)<0){
+                localStorageModel.push(item)
+            }
+        }
+    })
+    fillLocalStorage(localStorageModel)
+}
+
+function fillLocalStorage(model){
+    localStorage.setItem("goods", JSON.stringify(model))
+}
 
 
 
 
 module.exports = { 
-    renderGood
+    renderGood,
+    sendToСard,
+    addButtons,
+    localStorageModel,
+    fillLocalStorage
 };
