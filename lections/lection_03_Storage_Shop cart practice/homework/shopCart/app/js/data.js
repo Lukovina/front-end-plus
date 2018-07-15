@@ -16,7 +16,6 @@ function load(method, path) {
             }
 
             let res =  JSON.parse(xhr.responseText)
-            model = res.data.list
             resolve(res);
         }
     });

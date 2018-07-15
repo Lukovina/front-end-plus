@@ -1,16 +1,22 @@
-let good = require('./good.js');
+let goodL = require("./good.js")
+let data = require("./data.js")
+let dataBases = require("./dataBases.js")
 
 const cart = document.querySelector(".cart"),
       goodsTable = document.querySelector(".goodsTable"),
       cartButton = document.querySelector(".cartButton"),
       total = document.querySelector(".totalSum"),
-      closer = document.querySelector(".close"); 
+      closer = document.querySelector(".close"),
+      order = document.querySelector(".order"),
+      clearCart = document.querySelector(".clear"); 
 
 
 let goodsList = []
 
 cartButton.addEventListener("click", cartRender);
 closer.addEventListener("click", closeCart);
+order.addEventListener("click", sendOrder);
+clearCart.addEventListener("click", clear_Cart)
 
 
 function cartRender () {
@@ -39,6 +45,19 @@ function cartRender () {
         removeGood.forEach(item=>item.addEventListener("click", function(){removeGoodFromCart(item.id)}))            
 }
 
+function clear_Cart() {
+    
+    goodL.localStorageModel.forEach(item=>{
+        item.quantity = 0;
+        item.cartPrice = 0
+        }
+    )
+    goodL.localStorageModel = ""
+
+    goodL.fillLocalStorage(goodL.localStorageModel)
+    cartRender()
+}
+
 function totalSum(list){
     return list.map(key=>key.cartPrice).reduce((prev,item)=>prev+item,0)
    
@@ -49,10 +68,21 @@ function closeCart(){
 }
 
 function removeGoodFromCart(ident) {
-   let localStorageModer = []
-   goodsList.forEach(item=>{if(item.id!=ident){localStorageModer.push(item)}})
-   good.fillLocalStorage(localStorageModer)
+    goodL.localStorageModel.forEach(item=>{
+        if(item.id == ident) {
+            item.quantity = 0;
+        }
+    })
+    console.log(goodL.localStorageModel.filter(item=>item.id!=ident))
+   goodL.fillLocalStorage(goodL.localStorageModel.filter(item=>item.id!=ident))
+   
+   cartRender()
+  }
 
+
+  function sendOrder(){
+    data.load("POST", "http://localhost:3780/order")
+    .then(val=>console.log(val))
   }
 
 module.exports = { 

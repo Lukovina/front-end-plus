@@ -69,6 +69,9 @@ header{
 }
 
 .good_elements {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
     position: absolute;
     bottom: 2%;
     left: 10%;
@@ -96,8 +99,9 @@ header{
 }
 
 .good_cart-addBtn{
-    height: 100px;
-    width: 100px;
+    display: inline-block;
+    height: 70px;
+    width: 70px;
     background-color: orange;
     color: white;
     font-size: 20px;
@@ -112,7 +116,7 @@ header{
 }
 
 .good_cart-addBtn:active{
-    width: 95px;
+    background-color: orangered;
 }
 
 
@@ -164,3 +168,24 @@ td .close:before, td .close:after  {
     visibility: visible
 }
 
+.cart_btn{
+    background-color: orange;
+    width: 110px;
+    height: 110px;
+    float: right;
+    margin: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: white;
+    outline: none;
+    opacity: .6;
+}
+
+.cart_btn:hover {
+    opacity: 1;
+}
+
+.cart_btn:active {
+    background-color: orangered;
+}

@@ -1,22 +1,22 @@
-let data = require("./data.js"),
-    cart = require("./cart.js")
-
+let data = require("./data.js");
 
 let goods = document.querySelector(".goods"),
     list
 data.load("GET" , "http://localhost:3780/goods")
     .then(val=> list = val.data.list)
 
-var localStorageModel = JSON.parse(localStorage.getItem("goods")) || []    
-
+let localStorageModel = JSON.parse(localStorage.getItem("goods")) || []    
+debugger;
 function renderGood (element) {
     goods.innerHTML += `
     <div class="good">
         <div class="good-img" 
             style ="background-image: url('${element.img}')">
         <div class="good_elements">
+        <div class="good_elements-info">
             <p class="good_cart-title">${element.title}</p>
             <p class="good_cart-price">Price: ${element.price}$</p>
+        </div>    
             <button class="good_cart-addBtn" id="${element.id}"> Add to card </button> 
         </div>  
         </div>
@@ -45,9 +45,6 @@ function sendToСard(ident) {
 function fillLocalStorage(model){
     localStorage.setItem("goods", JSON.stringify(model))
 }
-
-
-
 
 module.exports = { 
     renderGood,
