@@ -14,7 +14,9 @@ function load(method, path) {
             if (xhr.readyState != 4) {
                 return;
             }
-
+            if(xhr.status!==200) {
+               reject()
+            }
             let res =  JSON.parse(xhr.responseText)
             resolve(res);
         }

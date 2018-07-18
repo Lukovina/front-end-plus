@@ -6,7 +6,7 @@ data.load("GET" , "http://localhost:3780/goods")
     .then(val=> list = val.data.list)
 
 let localStorageModel = JSON.parse(localStorage.getItem("goods")) || []    
-debugger;
+
 function renderGood (element) {
     goods.innerHTML += `
     <div class="good">

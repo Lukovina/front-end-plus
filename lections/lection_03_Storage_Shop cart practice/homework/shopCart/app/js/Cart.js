@@ -80,10 +80,14 @@ function removeGoodFromCart(ident) {
   }
 
 
-  function sendOrder(){
-    data.load("POST", "http://localhost:3780/order")
-    .then(val=>console.log(val))
-  }
+function sendOrder(){
+data.load("POST", "http://localhost:3780/order")
+.then(val=>console.log(val), onReject)
+}
+
+function onReject() {
+    dataBases.connectDB((r)=>console.log(r))
+}
 
 module.exports = { 
     cartRender,
