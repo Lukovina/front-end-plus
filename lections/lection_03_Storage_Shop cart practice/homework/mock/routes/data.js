@@ -16,38 +16,66 @@ function filereader(fsRef, path) {
 	});
 }
 
-function getUserbyId(req, res) {
-	let path = pathConcat('api' + req.url + '/' + req.method.toLowerCase() + '.json'),
-		servicePromise = filereader(fs, path);
+function dirreader(fsRef, path){
+	return new Promise(function (resolve, reject) {
+		fsRef.readdir(path, (err, contents)=>{
+			if (err) reject(err);
+			else resolve(contents);
+		});
+	});
+}
 
-	console.log(req);
+// function getUserbyId(req, res) {
+// 	let path = pathConcat('api' + req.url + '/' + req.method.toLowerCase() + '.json'),
+// 		servicePromise = filereader(fs, path);
 	
+// 	servicePromise
+// 		.then((response) => {
+// 			res.json(response);
+// 		});
+// }
+
+function getUsers(req, res) {
+		path = pathConcat('api' + req.url)
+		dirreader(fs, path)
+			.then(response=>response.map(element => {
+				let filePath = pathConcat(element + '/' + req.method.toLowerCase() + '.json')
+				return filereader(fs, filePath)
+			}))
+			.then(val=>Promise.all(val))
+			.then(files=>res.send(files))
+}
+
+async function getUsersWithActions(req, res){
+let first,
+	last,
+	servicePromise,
+	path
+
+await dirreader(fs, './api/users')
+	.then(data=>{
+		first = `./api/users/${data[0]}/${req.method.toLowerCase()}.json`
+		last = `./api/users/${data[data.length-1]}/${req.method.toLowerCase()}.json`
+	})
+	
+	switch(req.url) {
+		case '/users/first': path = first
+		break
+		case '/users/last': path = last
+		break
+	  }
+servicePromise = filereader(fs, path);
+
 	servicePromise
 		.then((response) => {
 			res.json(response);
-		});
-}
+		})
+		.catch(e=>console.log(e))
 
-function getUsers(req, res) {
-	let promises = [],
-		path = pathConcat('api' + req.url)
-		
-	fs.readdir(path, (err, contents)=>{
-		contents.forEach(file=>{
-		let filePath = pathConcat('api' + req.url + '/' + file + '/' + req.method.toLowerCase() + '.json')
 
-			promises.push(filereader(fs, filePath, 'utf8')) })
-			Promise.all(promises)
-				.then((data)=>res.json(data))
-	})
-	
-}
 
-function getUsersWithActions(req, res){
-
-console.log(req)
 
 }
 
 
-module.exports = { pathConcat, getUserbyId, getUsers, getUsersWithActions };
+module.exports = { pathConcat, getUsers, getUsersWithActions };

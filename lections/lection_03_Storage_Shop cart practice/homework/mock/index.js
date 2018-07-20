@@ -19,9 +19,9 @@ app.get('/', function (req, res) {
 	return res.json({ message: 'UI API!' });
 });
 
-app
-	.route('/users/:userId')
-	.get($data.getUserbyId);
+// app
+// 	.route('/users/:userId')
+// 	.get($data.getUserbyId);
 
 app
 	.route('/users')
