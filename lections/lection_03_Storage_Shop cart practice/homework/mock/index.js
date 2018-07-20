@@ -25,7 +25,11 @@ app
 
 app
 	.route('/users')
-	.get($data.getUsers);	
+	.get($data.getUsers);
+
+app
+	.route('/users/:action')
+	.get($data.getUsersWithActions)
 
 app.listen(port);
 console.log('Mock server listening on port ' + port);

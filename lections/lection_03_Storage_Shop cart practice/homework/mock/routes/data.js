@@ -16,26 +16,6 @@ function filereader(fsRef, path) {
 	});
 }
 
-// function getBuildings(req, res) {
-// 	let path = pathConcat('api' + req.route.path + '/' + req.method.toLowerCase() + '.json'),
-// 		servicePromise = filereader(fs, path);
-
-// 	console.log(path);
-	
-// 	servicePromise
-// 		.then((response) => {
-// 			// let newList = response.results.filter(item => item.price);
-
-// 			// response.results = newList;
-
-// 			return response;
-// 		})
-// 		.then((response) => {
-// 			res.json(response);
-// 		});
-// }
-
-
 function getUserbyId(req, res) {
 	let path = pathConcat('api' + req.url + '/' + req.method.toLowerCase() + '.json'),
 		servicePromise = filereader(fs, path);
@@ -49,22 +29,25 @@ function getUserbyId(req, res) {
 }
 
 function getUsers(req, res) {
+	let promises = [],
+		path = pathConcat('api' + req.url)
+		
+	fs.readdir(path, (err, contents)=>{
+		contents.forEach(file=>{
+		let filePath = pathConcat('api' + req.url + '/' + file + '/' + req.method.toLowerCase() + '.json')
 
-
-	fs.readFile('./users/001/get.json', 'utf8', function(err, contents) {
-		console.log(contents);
-	});
+			promises.push(filereader(fs, filePath, 'utf8')) })
+			Promise.all(promises)
+				.then((data)=>res.json(data))
+	})
 	
-	// let path = pathConcat('api' + req.url + '/' + req.method.toLowerCase() + '.json'),
-	// 	servicePromise = filereader(fs, path);
+}
 
-	// console.log(req);
-	
-	// servicePromise
-	// 	.then((response) => {
-	// 		res.json(response);
-	// 	});
+function getUsersWithActions(req, res){
+
+console.log(req)
+
 }
 
 
-module.exports = { pathConcat, getUserbyId, getUsers };
+module.exports = { pathConcat, getUserbyId, getUsers, getUsersWithActions };
