@@ -58,12 +58,12 @@ await dirreader(fs, './api/users')
 		last = `./api/users/${data[data.length-1]}/${req.method.toLowerCase()}.json`
 	})
 	
-	switch(req.url) {
-		case '/users/first': path = first
-		break
-		case '/users/last': path = last
-		break
-	  }
+switch(req.url) {
+	case '/users/first': path = first
+	break
+	case '/users/last': path = last
+	break
+	}
 servicePromise = filereader(fs, path);
 
 	servicePromise
@@ -71,10 +71,6 @@ servicePromise = filereader(fs, path);
 			res.json(response);
 		})
 		.catch(e=>console.log(e))
-
-
-
-
 }
 
 
