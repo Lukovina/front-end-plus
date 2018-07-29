@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/lections/lection_05_Gulp_npm_scripts/materials/main.js",
+            "program": "${workspaceFolder}/lections/lection_05_Gulp_npm_scripts/homework/languages/main.js",
             "env": {
                 "env": "local"
             }
