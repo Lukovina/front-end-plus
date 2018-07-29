@@ -8,9 +8,9 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/lections/lection_05_Gulp_npm_scripts/homework/languages/main.js",
+            "program": "${workspaceFolder}/lections/lection_05_Gulp_npm_scripts/homework/numbers/main.js",
             "env": {
-                "env": "local"
+                "env": [1,2,3,4]
             }
         }
     ]
