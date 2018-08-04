@@ -1,0 +1,25 @@
+@import 'vars'
+@import 'mixins'
+
+*
+    margin: 0 auto
+    box-sizing: border-box
+
+.header
+    background-color: $header-color 
+    height: 300px  
+    width: 100vw
+
+.main
+    @include large-text
+    background-color: $main-color
+    height: 500px
+    width: 100vw
+    text-align: center
+    padding: 200px
+    
+
+.footer
+    background-color: $footer-color
+    height: 300px
+    width: 100vw        

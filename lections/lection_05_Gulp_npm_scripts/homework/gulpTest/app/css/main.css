@@ -1,0 +1,24 @@
+* {
+  margin: 0 auto;
+  box-sizing: border-box; }
+
+.header {
+  background-color: green;
+  height: 300px;
+  width: 100vw; }
+
+.main {
+  font-family: Arial;
+  font-size: 30px;
+  font-weight: bold;
+  color: black;
+  background-color: yellow;
+  height: 500px;
+  width: 100vw;
+  text-align: center;
+  padding: 200px; }
+
+.footer {
+  background-color: red;
+  height: 300px;
+  width: 100vw; }
