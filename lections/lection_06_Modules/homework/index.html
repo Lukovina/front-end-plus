@@ -3,11 +3,22 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/main.css">
     <title>Curr</title>
-    <!--<script src="./js/app.js"></script>-->
 </head>
 <body>
     
-     <!--add script tags here -->
+    <table class="table">
+        <tr>
+            <td class="currentDate">Актуальный курс $</td>
+            <td class="archiveDate"><span>Выберите дату</span><input class="archiveInput" type="date"></td>
+            <td class="diff">Разница</td>
+        </tr>
+        <tr>
+            <td class="currentDateCurrency"></td>
+            <td class="archiveDateCurrency"></td>
+            <td class="diff_value"></td>
+        </tr>
+    </table>
+
 
     <script src="node_modules/systemjs/dist/system.js"></script>
     
