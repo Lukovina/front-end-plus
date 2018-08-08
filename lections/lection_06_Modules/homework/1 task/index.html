@@ -1,0 +1,43 @@
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Curr</title>
+</head>
+<body>
+    
+    <table class="table">
+        <tr>
+            <td class="currentDate">Актуальный курс $</td>
+            <td class="archiveDate"><span>Выберите дату</span><input class="archiveInput" type="date"></td>
+            <td class="diff">Разница</td>
+        </tr>
+        <tr>
+            <td class="currentDateCurrency"></td>
+            <td class="archiveDateCurrency"></td>
+            <td class="diff_value"></td>
+        </tr>
+    </table>
+
+    <table class = "archTable">
+        <tr>
+            <td >Курс валют <input type="number" class="arch-quantity_input" value="1"></td>
+            <td>Разница</td>
+        </tr>
+    </table>
+
+
+    <script src="node_modules/systemjs/dist/system.js"></script>
+    
+    <script>
+        System.config({
+            meta: {
+                format: 'cjs'
+            }
+        });
+        System.import('js/app.js');
+    </script>
+    
+    
+</body>
+</html>
