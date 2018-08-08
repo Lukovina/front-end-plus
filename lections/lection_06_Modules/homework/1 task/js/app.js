@@ -13,7 +13,7 @@ let currentCourse = "",
     archiveDate   = "",
     difference    = "",
     archiveArray  = [],
-    currentDate = new Date().toLocaleDateString('en-GB').replace(/\//g, "."),
+    // currentDate = new Date().toLocaleDateString('en-GB').replace(/\//g, "."),
     archiveQuantity
 
 archiveInput.addEventListener('change', fillArchive)
@@ -21,7 +21,7 @@ archQuantityInput.addEventListener('change', fillDiffArchive)
 
 
 function measureDifference (a,b) {
-    difference = (((a / b) * 100)-100).toFixed(2)
+    difference = ((a / b) * 100).toFixed(2)
 }
 
 function setArchiveDate(){
@@ -58,9 +58,10 @@ function setArchiveArray(){
     }
 }
 
-data.load(`https://api.privatbank.ua/p24api/exchange_rates?json&date=${currentDate}`)
+data.load(`https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5`)
 .then(val=>{
-    currentCourse = val.exchangeRate.filter(item=>item.currency === "USD")[0].saleRateNB
+    console.log(val.filter(item=>item.ccy === "USD"))
+    currentCourse = val.filter(item=>item.ccy === "USD")[0].sale
     render.render(currentCourse, todayCurrencyInner, "USD")
 })     
 
