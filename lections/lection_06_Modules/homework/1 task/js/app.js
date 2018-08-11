@@ -64,11 +64,11 @@ function setArchiveDatesArray(){
     // archiveDates.unshift(currentDate)
 }
 
-async function fillDiffArchive(){
+function fillDiffArchive(){
     setArchiveQuantity()
     setArchiveDatesArray()
-    await getArchiveCurrencies(archiveDates)
-    await getArrayOfDidderencies(archiveArray)
+    getArchiveCurrencies(archiveDates)
+    getArrayOfDidderencies(archiveArray)
 }
 
 function getArchiveCurrencies(dates){
