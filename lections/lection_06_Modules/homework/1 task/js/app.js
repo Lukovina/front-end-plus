@@ -64,30 +64,29 @@ function setArchiveDatesArray(){
     // archiveDates.unshift(currentDate)
 }
 
-function fillDiffArchive(){
+async function fillDiffArchive(){
     setArchiveQuantity()
     setArchiveDatesArray()
-    getArchiveCurrencies(archiveDates)
-    getArrayOfDidderencies(archiveArray)
+    await getArchiveCurrencies(archiveDates)
+    await getArrayOfDidderencies(archiveArray)
 }
 
-async function getArchiveCurrencies(dates){
+function getArchiveCurrencies(dates){
     archiveArray.push(currentCourse);
     
-    await dates.forEach(date => {
+    dates.forEach(date => {
             Promise.resolve(date)
             .then(()=>data.load(`https://api.privatbank.ua/p24api/exchange_rates?json&date=${date}`))
             .then(val=>archiveArray.push(val.exchangeRate.filter(item=>item.currency === "USD")[0].saleRateNB))
             .then(()=> console.log(archiveArray))
-        })
-
-    await function(){console.log(archiveArray)}    
+        }) 
     
     // Promise.all(archiveArray)
     //     .then(val=>f)
 }
 
 function getArrayOfDidderencies(list) {
+    console.log(list)
     list.reduce((prev, item)=> console.log("item" + item, "prev" + prev))
 }
 
