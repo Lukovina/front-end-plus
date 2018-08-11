@@ -12,28 +12,39 @@ let currentCourse = "",
     archiveCourse = "",
     archiveDate   = "",
     archiveDates  = []  ,
-    difference    = "",
-    archiveArray  = [],
-    arrayOfDidderencies,
-    currentDate = new Date().toLocaleDateString('en-GB').replace(/\//g, "."),
-    archiveQuantity
+    arrayOfDifferencies = [],
+    archiveQuantity = 0
+
+
+data.load(`https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5`)
+.then(val=>{
+    currentCourse = val.filter(item=>item.ccy === "USD")[0].sale
+    render.render(currentCourse, todayCurrencyInner, "USD")
+})     
 
 archiveInput.addEventListener('change', fillArchive)
 archQuantityInput.addEventListener('change', fillDiffArchive)
 
+function fillDiffArchive(){
+    setArchiveQuantity()
+    setArchiveDatesArray()
+    getArchiveCurrencies(archiveDates)
+}
 
 function measureDifference (a,b) {
-
+        let res = 0
+     
         if (a == b) {
-            difference = 0
+            return res
         }
 
         if(a>b) {
-            difference = difference  = (((a / b) * 100)-100).toFixed(2)
+            res = (((a / b) * 100)-100).toFixed(2)
         }else{
-            difference = difference  = (100 - ((a / b) * 100)).toFixed(2)
+            res = (100 - ((a / b) * 100)).toFixed(2)
         }
-
+       
+        return res
  }
 
 function setArchiveDate(){
@@ -48,8 +59,9 @@ function fillArchive() {
             archiveCourse = val.exchangeRate.filter(item=>item.currency === "USD")[0].saleRateNB
             render.render(archiveCourse, archiveCurrencyInner, "USD")
         })
-        .then(()=>{measureDifference(currentCourse, archiveCourse)})
-        .then(()=>render.render(difference, diffValue, "%"))
+        .then(()=>measureDifference(currentCourse, archiveCourse))
+        .then((diff)=>render.render(diff, diffValue, "%")
+    )
 }
 
 function setArchiveQuantity(){
@@ -61,41 +73,34 @@ function setArchiveDatesArray(){
         date.setDate(date.getDate() - 1)
         archiveDates.push(date.toLocaleDateString('en-GB').replace(/\//g, "."))
     }
-    // archiveDates.unshift(currentDate)
-}
-
-function fillDiffArchive(){
-    setArchiveQuantity()
-    setArchiveDatesArray()
-    getArchiveCurrencies(archiveDates)
-    getArrayOfDidderencies(archiveArray)
+    
 }
 
 function getArchiveCurrencies(dates){
-    archiveArray.push(currentCourse);
     
-    dates.forEach(date => {
-            Promise.resolve(date)
-            .then(()=>data.load(`https://api.privatbank.ua/p24api/exchange_rates?json&date=${date}`))
-            .then(val=>archiveArray.push(val.exchangeRate.filter(item=>item.currency === "USD")[0].saleRateNB))
-            .then(()=> console.log(archiveArray))
-        }) 
-    
-    // Promise.all(archiveArray)
-    //     .then(val=>f)
+    archiveDates = dates.map(date=>
+                Promise.resolve(date)
+                    .then(()=>data.load(`https://api.privatbank.ua/p24api/exchange_rates?json&date=${date}`))
+                    .then((item)=>item.exchangeRate.filter(item=>item.currency === "USD")[0].saleRateNB)   
+                )
+
+    Promise.all(archiveDates)
+           .then(val=>{
+                val.unshift(+currentCourse);
+                getArrayOfDidderencies(val);
+                render.archRender(val, arrayOfDifferencies, archiveList, "UAH")
+
+           })
+
 }
 
 function getArrayOfDidderencies(list) {
-    console.log(list)
-    list.reduce((prev, item)=> console.log("item" + item, "prev" + prev))
+
+    for (let i = 0; i<list.length;i++) {
+        arrayOfDifferencies.push(measureDifference(list[i], list[i+1]))
+    }
+
 }
-
-
-data.load(`https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5`)
-.then(val=>{
-    currentCourse = val.filter(item=>item.ccy === "USD")[0].sale
-    render.render(currentCourse, todayCurrencyInner, "USD")
-})     
 
 
 

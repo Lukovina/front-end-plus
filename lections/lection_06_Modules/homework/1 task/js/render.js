@@ -2,11 +2,15 @@ function render(currency, target, symbol) {
     target.innerHTML = `${currency} ${symbol}`
 }
 
-function archRender(args, inner) {
+function archRender(args, diffs,  inner, symbol) {
+
    
     inner.innerHTML += `
-        ${args.map(item=>
-            `<tr><td>${item}</td></tr>`
+        ${args.map((item, index)=>
+            `<tr>
+                <td>${item} ${symbol}</td>
+                <td>${diffs[index]} %<td>
+            </tr>`
         ).join("")}
     `
 }
