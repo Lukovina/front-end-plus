@@ -19,7 +19,7 @@ let currentCourse = "",
 data.load(`https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5`)
 .then(val=>{
     currentCourse = val.filter(item=>item.ccy === "USD")[0].sale
-    render.render(currentCourse, todayCurrencyInner, "USD")
+    render.render(currentCourse, todayCurrencyInner, "UAH")
 })     
 
 archiveInput.addEventListener('change', fillArchive)
