@@ -33,6 +33,10 @@ function fillDiffArchive(){
 
 function measureDifference (a,b) {
         let res = 0
+
+        if(!a||!b){
+            return "-"
+        }
      
         if (a == b) {
             return res
